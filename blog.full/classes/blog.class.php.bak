@@ -1,0 +1,134 @@
+<?php
+require_once "include/database.php";
+
+class BlogObject{
+ 
+    // database connection and table name
+    private $conn;
+    private $table_name = "bloglists";
+ 
+    // object properties
+    public $id;
+    public $created;    
+    public $author;
+    public $title;
+    public $contents;
+    public $views;
+    public $likes;
+    public $publish;
+ 
+    public function __construct(){
+        $db = Database::getInstance();
+        $this->conn = $db;
+    }
+ 
+    // create blog
+    function create(){ 
+        $query = "INSERT INTO " . $this->table_name . " (created, author, title, contents, publish) VALUES ('" . $this->created . "', '" . $this->author . "','" . $this->title . "','" . $this->contents . "','" . $this->publish . "') ";
+  
+        if($this->conn->execute($query)){
+            return true;
+        }else{
+            return false;
+        } 
+    }
+
+    // get rows count 
+    function countAll(){
+        $query = "SELECT * FROM " . $this->table_name . " WHERE publish = 'Yes'";
+        $stmt = $this->conn->getCount( $query );
+ 
+        return $stmt;
+    }
+
+    function readPaging($from_record_num, $records_per_page){ 
+        $query = "SELECT * FROM " . $this->table_name . " WHERE publish = 'Yes' ORDER BY created ASC LIMIT {$from_record_num}, {$records_per_page}";     
+        $stmt = $this->conn->getData( $query );
+     
+        return $stmt;
+    }
+
+    // read all datas 
+    function readAll(){
+        $query = "SELECT * FROM " . $this->table_name;
+        $stmt = $this->conn->getData( $query );
+ 
+        return $stmt;
+    }
+
+    // read datas with where
+    function readWithWhere($where){
+        $query = "SELECT * FROM " . $this->table_name . " WHERE " . $where;
+        $stmt = $this->conn->getData( $query );
+ 
+        return $stmt;
+    }
+
+    // // read all publish datas 
+    // function readAllPublish(){
+    //     $query = "SELECT * FROM " . $this->table_name . " WHERE publish = 'Yes'";
+    //     $stmt = $this->conn->getData( $query );
+ 
+    //     return $stmt;
+    // }
+
+    // // read data by id 
+    // function readById(){
+    //     $query = "SELECT * FROM " . $this->table_name . " WHERE id = " . $this->id;  
+    //     $stmt = $this->conn->getData( $query );
+ 
+    //     return $stmt;
+    // }
+
+    // // read data by author 
+    // function readByAuthor(){
+    //     $query = "SELECT * FROM " . $this->table_name . " WHERE author = '" . $this->author . "'";  
+    //     $stmt = $this->conn->getData( $query );
+ 
+    //     return $stmt;
+    // }
+
+    // update blog
+    function update(){ 
+        $query = "UPDATE " . $this->table_name . " SET created = '" . ($this->created) . "', author = '" . ($this->author) . "', title = '" . ($this->title) . "', contents = '" . ($this->contents) . "', publish = '" . ($this->publish) . "' WHERE id = " . $this->id;
+  
+        if($this->conn->execute($query)){
+            return true;
+        }else{
+            return false;
+        } 
+    }
+
+    // update blog's views
+    function updateViews(){ 
+        $query = "UPDATE " . $this->table_name . " SET views = " . ($this->views + 1) . " WHERE id = " . $this->id;
+  
+        if($this->conn->execute($query)){
+            return true;
+        }else{
+            return false;
+        } 
+    }
+
+    // update blog's likes
+    function updateLikes(){ 
+        $query = "UPDATE " . $this->table_name . " SET likes = " . $this->likes . " WHERE id = " . $this->id;
+  
+        if($this->conn->execute($query)){
+            return true;
+        }else{
+            return false;
+        } 
+    }
+
+    // delete blog
+    function delete(){   
+        if($this->conn->delete($this->id, $this->table_name)){
+            return true;
+        }else{
+            return false;
+        } 
+    }
+ 
+}
+?>

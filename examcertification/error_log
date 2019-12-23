@@ -1,0 +1,1 @@
+[14-Jun-2019 19:33:09 UTC] PHP Fatal error:  Call to a member function getData() on null in /home/nccaadev2/public_html/incomecdq/classes/incomecdq.class.php on line 66

@@ -1,0 +1,246 @@
+receiptContentModal
+.modal-content.paymentContent{
+    /*width: 767.71px;*/
+    /*min-height: 940px;*/
+}
+.paymentContent #frmStripePayment label.error{
+    color: #ef3333 !important;
+    font-weight: 500 !important;
+    font-size: 13px !important;
+    padding-top: 3px !important;
+}
+.paymentContent .top_body{
+    background: #F7F7F7;
+    padding: 10px 30px;
+    position: relative;
+    height: 82px;
+}
+.paymentContent .top_body .today_date{
+    /*position: absolute;*/
+    /*top: 20px;*/
+    /*right: 0px;*/
+    margin-left: 80px;
+    margin-top: 10px;
+}
+.paymentContent .top_body .today_date span{
+    font-weight: 100;
+    font-size: 30px;
+    color: rgb(112,112,112);
+}
+.paymentContent .top_body .today_date p{
+    font-weight: 600;
+    padding-top: 35px;
+    font-size: 15px;
+    color: rgb(50, 50, 50);
+}
+.paymentContent .top_body .logo_title{
+    margin-top: 0;
+    font-size: 19px;
+    font-weight: bold;
+    font-family: Circe;
+    float: left;
+    color: rgb(50, 50, 50);
+    padding: 13px 10px;
+    margin-left: -35px;
+}
+.paymentContent .section1{
+    padding: 35px 20px;
+    margin: 0;
+}
+.paymentContent .section1 h5{
+    font-weight: bold;
+    font-size: 23px;
+    font-family: Circe;
+    margin-bottom: 8px;
+    color: rgb(50, 50, 50);
+}
+.paymentContent .section1 p{
+    font-size: 18px;
+    font-family: 'Circe';
+    color: rgb(112, 112, 112);
+}
+.paymentContent .section1 div.receipt_head{
+    margin-bottom: 30px;
+}
+.paymentContent .section1 div.receipt_head h6{
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 0px;
+}
+.paymentContent .section1 div.receipt_head p{
+    font-size: 14px;
+    font-family: Circe;
+    font-weight: bold;
+    color: rgb(91,201,111) !important;
+}
+.paymentContent .section1 ul{
+    margin-top: 25px;
+    font-size: 14px;
+    margin-left: 20px;
+}
+.paymentContent .section1 ul li{
+    list-style: disc !important;
+    padding: 3px;
+    color: rgb(112, 112, 112);
+}
+.paymentContent .section1 ul li a{
+    font-size: 14px;
+    font-family: 'Circe';
+    color: rgb(112, 112, 112);
+    margin-left: -8px;
+}
+.paymentContent .section1 ul li a:hover{
+    color: rgb(112, 112, 112);
+}
+.paymentContent .deadline{
+    border-bottom: 1px solid #e1dbdb;
+    width: 725.17px;
+    margin: auto;
+}
+.paymentContent .deadline2{
+    border-bottom: 1px solid #e1dbdb;
+    margin-bottom: 15px;
+}
+.paymentContent .section2{
+    padding:35px;
+}
+.paymentContent .section2 h5{
+    font-weight: bold;
+    font-family: 'Circe';
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+.paymentContent .section2 h2{
+    font-size: 28px;
+    font-family: 'Circe';
+    font-weight: bold;
+}
+.paymentContent .section2 p{
+    font-size: 14px;
+    font-family: 'CirceRegular';
+}
+.paymentContent .section2 label {
+    float: left;
+    width: 100%;
+    font-size: 14px;
+    line-height: 20px;
+    font-family: 'Circe';
+    font-weight: bold;
+    color: rgba(117,117,117);
+    letter-spacing: -0.2px;
+    text-align: left;
+    font-weight: bold;
+    margin-bottom: 0;
+}
+.paymentContent .section2 .form-input{
+    height: 40px !important;
+    border: solid 1px rgb(240,240,240);
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    padding: 0 0px 0px 15px;
+    font-size: 14px;
+    color: #000;
+    font-family: 'Circe';
+    box-sizing: border-box;
+    width: 100%;
+}
+.paymentContent .section2 .form-submit{
+    height: 43.25px !important;
+    border: solid 1px #e1dbdb;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    font-size: 14px;
+    color: white;
+    font-family: 'Circe';
+    font-weight: bold;
+    box-sizing: border-box;
+    /*width: 100%;*/
+    background: rgb(36,96,139);
+    cursor: pointer;
+    width:  91.58px;
+    margin-top: 30px;
+}
+.paymentContent .section2 .pay_title{
+    border: 1px solid rgb(240,240,240);
+    border-radius: 5px;
+    padding: 25px;
+    margin-top: 10px;
+}
+.paymentContent .section2 .form-bottom{
+    margin-top: 25px;
+    padding: 5px;
+}
+.paymentContent .section2 .form-bottom #submit-btn{
+
+}
+.paymentContent .section3 li{
+    list-style: none;
+    margin-bottom: 10px;
+}
+.paymentContent .section3 a{
+    font-weight: bold;
+    color:rgb(36,96,139) !important;
+    font-size: 14px;
+    font-family: 'Circe';
+}
+.paymentContent .section3{
+    margin-top: 30px;
+}
+.paymentContent .form-group{
+    margin-bottom: 15px !important;
+}
+#error-message{
+    color: #ef3333;
+    text-align: left;
+    margin-bottom: 7px;
+}
+#error-message2{
+    margin-bottom: 10px;
+    color: #ef3333;
+    text-align: left;
+}
+#loader{
+    display: none;
+}
+#loader2{
+    display: none;
+}
+.receipt_body{
+    margin: 25px 5px 35px 5px !important;
+    padding: 0 15px;
+}
+.receipt_body div.col-xs-3 h5{
+    margin-bottom: 3px;
+    font-weight: bold;
+}
+.receipt_body div.col-xs-3 p{
+    margin-bottom: 3px;
+    font-size: 14px;
+    color: rgb(112, 112, 112);
+}
+.receipt_body div.col-xs-8 p{
+    margin-bottom: 10px;
+    font-size: 13px;
+    font-family: 'Circe';
+    color: rgb(112, 112, 112);
+}
+.receipt_bottom{
+    padding: 12px 30px;
+    background: #F7F7F7;
+}
+.receipt_bottom a{
+    color: rgb(36, 96, 139) !important;
+    font-weight: bold;
+    font-size: 14px;
+    padding-right: 20px;
+}
+.receipt_bottom a i{
+    padding-right: 5px;
+    font-size: 15px;
+}
+
+#frmStripePayment{
+    margin-bottom: 0px;
+}

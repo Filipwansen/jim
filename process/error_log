@@ -1,0 +1,5 @@
+[15-Mar-2019 12:19:52 UTC] PHP Warning:  include(user/config.php): failed to open stream: No such file or directory in /home/procopbn/public_html/nccaa/member/process/tab1.php on line 5
+[15-Mar-2019 12:19:52 UTC] PHP Warning:  include(): Failed opening 'user/config.php' for inclusion (include_path='.:/opt/cpanel/ea-php71/root/usr/share/pear') in /home/procopbn/public_html/nccaa/member/process/tab1.php on line 5
+[15-Mar-2019 12:26:03 UTC] PHP Parse error:  syntax error, unexpected '}', expecting ',' or ';' in /home/procopbn/public_html/nccaa/member/process/tab1.php on line 118
+[15-Mar-2019 12:26:08 UTC] PHP Parse error:  syntax error, unexpected '}', expecting ',' or ';' in /home/procopbn/public_html/nccaa/member/process/tab1.php on line 118
+[15-Mar-2019 12:26:35 UTC] PHP Parse error:  syntax error, unexpected '}', expecting ',' or ';' in /home/procopbn/public_html/nccaa/member/process/tab1.php on line 118

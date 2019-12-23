@@ -1,0 +1,15 @@
+.paymentContent #frmStripePaymentcertification label.error{
+    color: #ef3333 !important;
+    font-weight: 500 !important;
+    font-size: 13px !important;
+    padding-top: 3px !important;
+}
+
+.modal-content .modal-body .btn-blue{
+    height: 43.25px !important;
+    font-size: 14px;
+    font-family: 'Circe';
+    font-weight: bold;
+    width:  100%;
+}
+

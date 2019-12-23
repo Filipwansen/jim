@@ -1,0 +1,6 @@
+.paymentContent #frmStripePaymentCME label.error{
+    color: #ef3333 !important;
+    font-weight: 500 !important;
+    font-size: 13px !important;
+    padding-top: 3px !important;
+}

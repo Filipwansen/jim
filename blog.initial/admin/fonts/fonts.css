@@ -1,0 +1,60 @@
+@font-face {
+    font-family: 'Circe Extra';
+    src: url('Circe-ExtraLight.eot');
+    src: url('Circe-ExtraLightd41d.eot?#iefix') format('embedded-opentype'),
+    url('Circe-ExtraLight.woff2') format('woff2'),
+    url('Circe-ExtraLight.woff') format('woff'),
+    url('Circe-ExtraLight.ttf') format('truetype'),
+    url('Circe-ExtraLight.svg#Circe-ExtraLight') format('svg');
+    font-weight: 200;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Circe';
+    src: url('Circe-Bold.eot');
+    src: url('Circe-Boldd41d.eot?#iefix') format('embedded-opentype'),
+    url('Circe-Bold.woff2') format('woff2'),
+    url('Circe-Bold.woff') format('woff'),
+    url('Circe-Bold.ttf') format('truetype'),
+    url('Circe-Bold.svg#Circe-Bold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Circe';
+    src: url('Circe-Light.eot');
+    src: url('Circe-Lightd41d.eot?#iefix') format('embedded-opentype'),
+    url('Circe-Light.woff2') format('woff2'),
+    url('Circe-Light.woff') format('woff'),
+    url('Circe-Light.ttf') format('truetype'),
+    url('Circe-Light.svg#Circe-Light') format('svg');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Circe Extra';
+    src: url('Circe-ExtraBold.eot');
+    src: url('Circe-ExtraBoldd41d.eot?#iefix') format('embedded-opentype'),
+    url('Circe-ExtraBold.woff2') format('woff2'),
+    url('Circe-ExtraBold.woff') format('woff'),
+    url('Circe-ExtraBold.ttf') format('truetype'),
+    url('Circe-ExtraBold.svg#Circe-ExtraBold') format('svg');
+    font-weight: 800;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Circe';
+    src: url('Circe-Regular.eot');
+    src: url('Circe-Regulard41d.eot?#iefix') format('embedded-opentype'),
+    url('Circe-Regular.woff2') format('woff2'),
+    url('Circe-Regular.woff') format('woff'),
+    url('Circe-Regular.ttf') format('truetype'),
+    url('Circe-Regular.svg#Circe-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+

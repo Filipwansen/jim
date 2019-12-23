@@ -1,0 +1,210 @@
+.form-container{
+max-width:960px;
+margin:auto;
+}
+body, *{
+font-family:'Roboto', serif;
+}
+.form-section table tr th{
+font-weight:normal;
+padding-bottom:20px;
+font-family:'Roboto', serif;
+}
+.form-section table tr th:last-child{
+text-align:right;
+}
+.form-section table tr td{
+border:1px solid #efefef;
+font-family:'Roboto', serif;
+padding:15px 0 15px 30px;
+}
+.form-section table tr td:last-child{
+text-align:center;
+}
+.form-section table tr td span{
+color:#aaa;
+}
+.form-section.membership-form-summary{
+border:0 none;
+padding:0;
+margin-top:30px;
+}
+.form-section.membership-form-summary table{
+width:99.9%;
+}
+.form-section{
+border:1px solid #eaeaea;
+padding:10px;
+margin-bottom:40px;
+box-shadow:1px 1px 10px 6px #eee;
+}
+.form-section input, .form-section textarea, .form-section select{
+box-shadow:1px 1px 10px 0px #ddd;
+color:#999;
+border:1px solid #eee;
+}
+#retirement-popup.form-section > .row{
+margin-bottom:20px;
+}
+.form-section input[type="checkbox"]{
+box-shadow:0 0 0 0;
+visibility:hidden;
+display:none;
+}
+.form-section input[type="radio"]{
+box-shadow:0 0 0 0;
+visibility:hidden;
+display:none;
+}
+.form-section#retirement{
+margin-bottom:10px;
+}
+.add-other-address{
+margin-bottom:40px;
+}
+.form-section .col-md-12.matric-datefields.reg-cycle-sec{
+margin-top:40px;
+}
+.form-section .col-md-12.matric-datefields.start-dates .row:first-child{
+}
+.form-section .col-md-12.matric-datefields.start-dates .row, .form-section .col-md-12.base .row, .form-section.retirement-form-popup .col-md-12 .row{
+margin-bottom:15px;
+}
+.form-section .col-md-12.matric-datefields.reg-cycle-sec .row:first-child, #memberships.form-section .col-md-12.date-joined, #memberships.form-section .col-md-12.date-joined p{
+margin-bottom:0;
+}
+.form-section .col-md-12.matric-datefields.reg-cycle-sec .row, #skills.form-section .col-md-12 .row, #memberships.form-section .col-md-12 .row{
+margin-bottom:20px;
+}
+.form-section .col-md-6.matric-datefields .matric-datefields-head, .form-section .col-md-12.matric-datefields .matric-datefields-head, .form-section.retirement-form-popup .col-md-12.save-cancel .row, #retirement-popup .dates .row:first-child, #retirement-popup .dates .row p{
+margin-bottom:0;
+}
+#retirement-popup{
+display:none;
+}
+.form-section .col-md-6.matric-datefields .row{
+margin-bottom:20px;
+}
+.form-section .col-md-6.matric-datefields h2, .form-section .col-md-12.matric-datefields h2{
+margin-bottom:5px;
+margin-top:0;
+font-size:14px;
+}
+.form-section .col-md-12, .form-section .col-md-12.emails .row, .form-section .col-md-12.prog-code .row{
+margin-bottom:15px;
+}
+.form-section .col-md-6.program-length, .form-section .col-md-12.actual-test-passfail{
+margin-top:15px;
+}
+.form-section .col-md-12.name, #personal-info.form-section .col-md-12.ethnicity-sec{
+margin-bottom:30px;
+}
+#program.form-section .col-md-12.school-sec{
+margin-bottom:60px;
+}
+#program.form-section .col-md-12.hours-sec{
+margin-top:60px;
+}
+.form-section label {
+    margin-right: 30px;
+    font-size: 13px;
+	margin-top:0;
+	margin-bottom:0;
+	position:relative;
+}
+.form-section input[type="checkbox"] + label:before {
+    position: absolute;
+    border: 1px solid #ccc;
+	border-radius:5px;
+    content: "\00a0";
+    display: inline-block;
+    font: 15px/1em sans-serif;
+    height: 15px;
+    margin: 0 0 0 0;
+    padding: 0;
+    vertical-align: top;
+    left: -20px;
+    width: 15px;
+}
+.form-section input[type="checkbox"]:checked + label:before {
+    background: #fff;
+    color: #333;
+    content: "\2713";
+    text-align: center;
+}
+.form-section input[type="radio"]+label:before {
+    position: absolute;
+    border: 1px solid #ccc;
+	border-radius:5px;
+    content: "\00a0";
+    display: inline-block;
+    font: 15px/1em sans-serif;
+    height: 15px;
+    margin: 0 0 0 0;
+    padding: 0;
+    vertical-align: top;
+    left: -20px;
+    width: 15px;
+}
+.form-section input[type="radio"]:checked+label:before {
+    background: #fff;
+    color: #333;
+    content: "\2713";
+    text-align: center;
+}
+.form-section label.if-other{
+float:left;
+margin:10px 0 15px 0;
+line-height:34px;
+}
+.form-section label.if-other input{
+width:auto;
+margin-left:5px;
+float:right;
+}
+#skills.form-section .col-md-12.save-cancel .row, #memberships.form-section .col-md-12.save-cancel .row{
+margin-bottom:0;
+}
+.form-section .col-md-12.base .row.anticipated, .form-section .col-md-12.base .row.anticipated p{
+margin-bottom:0;
+}
+.form-section label input{
+margin-top:0;
+margin-bottom:0;
+	margin-right:2px;
+vertical-align:middle;
+font-weight:normal;
+}
+.form-section a i.fa-check{
+color:#00CC00;
+}
+.form-section .col-md-12 .btn-primary{
+background:#4ee04e;
+border:1px solid #4ee04e;
+color:#fff;
+}
+.form-section .col-md-12 .btn-danger{
+color:#fff;}
+.form-section .col-md-12 .btn-primary:hover{
+background:#00cc00;
+color:#fff;
+border:1px solid #00CC00;
+}
+.form-section strong{}
+.form-section table tr:hover{
+box-shadow:1px 3px 6px 0px rgba(0, 0, 0, 0.2);
+}
+.form-section table tr th:first-child {
+    padding-left: 30px;
+    padding-top: 20px;
+}
+.form-section table tr th:last-child {
+    padding-right: 30px;
+    padding-top: 20px;
+}
+.add-previous-employers{
+	margin-bottom:40px;
+}
+.col-md-8.work-schedule {
+    padding-left: 32px;
+}
