@@ -46,7 +46,7 @@ class EmailObject {
 
  
 
-    // create blog
+    // create 
 
     public function create(){ 
 	

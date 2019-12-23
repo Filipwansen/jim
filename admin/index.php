@@ -173,9 +173,7 @@ if(isset($_POST['id']) && isset($_POST['select_id'])){
 		<!-- Editable Table Plugin Js -->
 
 		<script src="../plugins/editable-table/mindmup-editabletable.js"></script>
-        <script type="text/javascript" src="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.11/js/dataTables.checkboxes.min.js"></script>
-
-
+    <script src="../plugins/jquery-datatable/dataTables.checkboxes.min.js"></script>
 
 		<script src="../plugins/bootstrap-select/js/bootstrap-select.js"></script>
 
@@ -200,9 +198,8 @@ if(isset($_POST['id']) && isset($_POST['select_id'])){
     <link rel="stylesheet" href="./css/select.dataTables.min.css">
 
     <link rel="stylesheet" href="./css/buttons.dataTables.min.css">
-
-    <link type="text/css" href="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.11/css/dataTables.checkboxes.css" rel="stylesheet" />
     
+    <link rel="stylesheet" href="./css/dataTables.checkboxes.css">
 
     <link rel="stylesheet" href="./css/jquery-ui.css">
 

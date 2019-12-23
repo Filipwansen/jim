@@ -25,14 +25,14 @@
 
         $email->content = $_POST['msg_contents'];        
 
-        /*==>> File upload*/
+        /*==>> File upload .. email_banner*/ 
         $MSG = "";
         $target_dir =  "../../upload/";
         $target_file = $target_dir . basename($_FILES["attached"]["name"]);
 
         $uploadOk = 1; $attached = "";
-
-        // Check if file already exists
+        
+        //Check if file already exists
         if (file_exists($target_file)) {
 
             $MSG = "Sorry, file already exists.";
@@ -59,6 +59,42 @@
 
         $_SESSION['resultMSG']=['type'=>$uploadOk, 'msg'=>$MSG];
 
+        /*==>> Banner image upload */
+        $_MSG = "";
+        $target_dir =  "../../upload/";
+        $target_file = $target_dir . basename($_FILES["attached"]["name"]);
+
+        $uploadOk = 1; $attached = "";
+        
+        //Check if file already exists
+        if (file_exists($target_file)) {
+
+            $MSG = "Sorry, file already exists.";
+            $attached = $_FILES["attached"]["name"];
+            $uploadOk = 0;
+        }
+        // Check file size
+        if ($_FILES["attached"]["size"] > 500000) {
+
+            $MSG = "Sorry, your file is too large.";
+            $uploadOk = 0;
+        }
+
+        if (move_uploaded_file($_FILES["attached"]["tmp_name"], $target_file)) {
+            
+            $MSG =  "Your MSG sent successfully. <br> The file has been uploaded.";
+            $uploadOk = 1;
+            $attached = $_FILES["attached"]["name"];
+        }
+        else{
+            $uploadOk = 1;
+            $MSG = "Your MSG sent successfully. <br> But, Not Attached file.";
+        }
+
+        $_SESSION['resultMSG']=['type'=>$uploadOk, 'msg'=>$MSG];
+
+
+
         // insert the db table
 
         $email->attach = $attached; $receiver_id=[];
@@ -84,5 +120,39 @@
         return;
 
     }
+
+    // function file_upload($target_file, &$attached){  
+
+    //     $uploadOk = 1; $attached = ""; $MSG = "";
+
+    //     // Check if file already exists
+    //     if (file_exists($target_file)) {
+
+    //         $MSG = "Sorry, file already exists.";
+    //         $attached = $attached["name"];
+    //         $uploadOk = 0;
+    //     }
+    //     // Check file size
+    //     if ($attached["size"] > 500000) {
+
+    //         $MSG = "Sorry, your file is too large.";
+    //         $uploadOk = 0;
+    //     }
+    //     var_dump( move_uploaded_file($attached["tmp_name"], $target_file) );
+    //     die();
+
+    //     if (move_uploaded_file($attached["tmp_name"], $target_file)) {
+            
+    //         $MSG =  "Your MSG sent successfully. <br> The file has been uploaded.";
+    //         $uploadOk = 1;
+    //         $attached = $attached["name"];
+    //     }
+    //     else{
+    //         $uploadOk = 1;
+    //         $MSG = "Your MSG sent successfully. <br> But, Not Attached file.";
+    //     }
+
+    //     return [ 'upload' => $uploadOk, 'attach' =>  $attached, 'msg' => $MSG ];
+    // }
 
 ?>

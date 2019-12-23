@@ -1,6 +1,5 @@
 <div class="member-card card">
 
-
     <h3>New Blast Email</h3>
 
 
@@ -19,10 +18,7 @@
 
 
                     <div class="form-group border-b-1">
-
-
                         <div class="row">
-
 
                             <div class="col-md-1">
                                 <label>From:</label>
@@ -33,26 +29,17 @@
                                 <input type="hidden" name="sender_id" value="<?= $_SESSION['user_id']?>">
                             </div>
 
-
                         </div>
-
                     </div>
 
 
             <div class="form-group border-b-1">
 
-
                 <div class="row">
 
-
                     <div class="col-md-1">
-
-
                         <label>To:</label>
-
-
                     </div>
-
 
                     <div class="col-md-11">
                     	<div style="display: inline-block;">
@@ -73,40 +60,77 @@
             </div>
 
 
-                    <div class="form-group border-b-1">
-
-
-                        <div class="row">
-
-
-                            <div class="col-md-1">
-
-
-                                <label>Subject:</label>
-
-
-                            </div>
-
-
-                            <div class="col-md-11">
-
-
-                                <input type="text" name="title" id="title" class="form-control border-0" value="<?php echo isset($rec["title"]) ? $rec["title"] : "" ?>" required/>
-
-
-                            </div>
-
-
-                        </div>
-
-
+            <div class="form-group border-b-1">
+                <div class="row">
+                    <div class="col-md-1">
+                        <label>Subject:</label>
                     </div>
 
-
+                    <div class="col-md-11">
+                        <input type="text" name="title" id="title" class="form-control border-0" value="<?php echo isset($rec["title"]) ? $rec["title"] : "" ?>" required/>
+                    </div>
                 </div>
-
-
             </div>
+
+            <div class="form-group border-b-1">
+                <div class="row">
+                    <div class="col-md-1">
+                        <label>CC:</label>
+                    </div>
+
+                    <div class="col-md-11">
+                        <input type="text" name="title" id="cc" class="form-control border-0" value="test@mkbazaar.co.uk" required/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group border-b-1">
+                <div class="row">
+                    <div class="col-md-1">
+                        <label>Bcc:</label>
+                    </div>
+
+                    <div class="col-md-11">
+                        <input type="text" name="title" id="bcc" class="form-control border-0" value="test@mkbazaar.co.uk" required/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group border-b-1">
+                <div class="row">
+                    <div class="col-md-1">
+                        <label>Banner:</label>
+                    </div>
+
+                    <div class="col-md-11">
+                        <a onclick="$('#imgInp').click();" class="btn btn-secondary w-6 mb-3" style="background-color: #e5e5e5; color:#000; border: 0; margin-bottom: 10px">
+                            <i class="fas fa-paperclip"></i>
+                            Banner Img
+                        </a>
+                        <label id="banner_filename" style="margin-left: 10px"></label><span>* 680 X 80</span>
+                        <input type="file" id="imgInp" accept="image/*" style="display: none;" name="banner">
+                            <script>
+                                $('#imgInp').on('change', function(){
+                                    $('#banner_filename').text(this.value.replace(/.*[\/\\]/, ''));
+                                });
+                            </script>
+
+                        <img id="blah" src="#" alt=" Blast Email Banner Image " style=" width: 100%;
+                                                                        max-width: 680px;
+                                                                        height: auto;
+                                                                        background: #dddddd;
+                                                                        font-family: sans-serif;
+                                                                        font-size: 15px;
+                                                                        line-height: 15px;
+                                                                        color: #555555!important;
+                                                                        margin: auto;
+                                                                        display: block;" />
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
 
 
             <div class="form-group border-b-1">
@@ -137,6 +161,7 @@
 
 
             <div>
+                <!-- >> File attach section -->
 	          	<div class="reply mt-2">
 
                     <a onclick="$('#my_file').click();" class="btn btn-secondary w-6 mb-3" style="background-color: #e5e5e5; color:#000; border: 0; margin-bottom: 10px">
@@ -153,9 +178,13 @@
 	            	<div id="summernote"></div>
                     <input type="hidden" name="msg_contents">
 	          	</div>
+                <!-- <<  -->
 
+                <!-- Msg send -->
 	          	<div class="text-right my-3" style="margin-top: 10px">
-                    <button type="submit" class="btn btn-primary px-4 cl-fff" name="submit"><i class="fas fa-paper-plane"></i>  SEND</button>
+                    <button type="submit" class="btn btn-primary px-4 cl-fff" name="submit">
+                        <i class="fas fa-paper-plane"></i>  SEND
+                    </button>
 	          	</div>            	
             </div>
 
@@ -499,14 +528,12 @@
 </div>
 <!-- << end of Add Group popup -->
 
+<style type="text/css">
+img#blah[src=""] {
+  display:none!important;
+}
+</style>
 
-
-<script>
-$(document).ready(function() {
-
-
-});
-</script>
 <script src="https://cdn.ckeditor.com/4.11.3/standard/ckeditor.js"></script>
 <script>
   CKEDITOR.replace( 'summernote' );
