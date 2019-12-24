@@ -43,7 +43,7 @@
 
                     <div class="col-md-11">
                     	<div style="display: inline-block;">
-                        	<input type="text" id="emailUids" class="form-control border-0" value="" readonly="true" style="background-color: #f7f7f7; width: 300px; overflow: hidden; text-overflow:ellipsis;" title="Selected Members/Groups" required/>
+                        	<input name="selectedEmails" type="text" id="emailUids" class="form-control border-0" readonly="true" title="Selected Members/Groups" required/>
                             <input type="hidden" name="receiver_ids">
                             <input type="hidden" name="receiver_type">
                     	</div>
@@ -79,7 +79,7 @@
                     </div>
 
                     <div class="col-md-11">
-                        <input type="text" name="title" id="cc" class="form-control border-0" value="test@mkbazaar.co.uk" required/>
+                        <input type="text" name="cc" id="cc" class="form-control border-0" value="test@mkbazaar.co.uk" required/>
                     </div>
                 </div>
             </div>
@@ -91,7 +91,7 @@
                     </div>
 
                     <div class="col-md-11">
-                        <input type="text" name="title" id="bcc" class="form-control border-0" value="test@mkbazaar.co.uk" required/>
+                        <input type="text" name="bcc" id="bcc" class="form-control border-0" value="test@mkbazaar.co.uk" required/>
                     </div>
                 </div>
             </div>
@@ -141,16 +141,6 @@
 
                     <div class="col-md-12">
 
-
-                        <!-- <textarea id="editor" name="editor" class="editor form-control border-0">
-
-
-                            <?php echo isset($rec["contents"]) ? $rec["contents"] : "" ?>
-
-
-                        </textarea> -->
-
-
                     </div>
 
 
@@ -168,11 +158,18 @@
 	          		    <i class="fas fa-paperclip"></i>
 	          		    Attach Files
 	          		</a>&nbsp;<label id="filenameshow" style=""></label>
-
+                    <span> *Max Size is 500KB</span>
 	          		<input type="file" id="my_file" style="display: none;" name="attached">
                         <script>
                             $('#my_file').on('change', function(){
-                                $('#filenameshow').text(this.value.replace(/.*[\/\\]/, ''));
+
+                                if(this.files[0].size > 500000){
+                                    alert("File size should not be greater than 500Kb");
+                                    return false;
+                                }
+                                else{
+                                    $('#filenameshow').text(this.value.replace(/.*[\/\\]/, ''));
+                                }
                             });
                         </script>
 	            	<div id="summernote"></div>
@@ -534,6 +531,7 @@ img#blah[src=""] {
 }
 </style>
 
+
 <script src="https://cdn.ckeditor.com/4.11.3/standard/ckeditor.js"></script>
 <script>
   CKEDITOR.replace( 'summernote' );
@@ -541,6 +539,7 @@ img#blah[src=""] {
   		$(this).css('display', 'none');
   		$('#reply_send_box').show();
   });
+
 </script>
 <style type="text/css">
     textarea{border: none; background-color: #e6e6e6;} 

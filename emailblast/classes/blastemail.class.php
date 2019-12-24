@@ -18,9 +18,19 @@ class EmailObject {
 
     public $receiver_id;
 
+    public $receiver_ids;
+
+    public $receiver_emails;
+
+    public $receiver_cc;
+
+    public $receiver_bcc;
+
     public $subject;
 
     public $attach;
+
+    public $banner;
 
     public $content;
 
@@ -37,11 +47,7 @@ class EmailObject {
  
 
     public function __construct($db){
-
-    	// global $db;   		
-
-        $this->conn = $db;        
-
+        $this->conn = $db;
     }
 
  
@@ -50,9 +56,18 @@ class EmailObject {
 
     public function create(){ 
 	
-        $query = "INSERT INTO ".$this->table_name." (sender_id, receiver_id, subject, attach, content, p_id) VALUES(".$this->sender_id.", '".$this->receiver_id."', '".$this->subject."', '".$this->attach."', '".$this->content."', ".$this->p_id.")";
-
-        if($this->p_id > 0){ $this->updateUnReadById($this->p_id); }
+        $query = "INSERT INTO `email_blast` (`sender_id`, 
+                                             `receiver_ids`, 
+                                             `subject`, 
+                                             `attach`, 
+                                             `content`, 
+                                             `receiver_emails`,
+                                             `receiver_cc`,
+                                             `receiver_bcc`,
+                                             `banner_img`) 
+        VALUES(".$this->sender_id.", '".$this->receiver_ids."', '".$this->subject."', '".$this->attach."', '"
+                .$this->content."', '".$this->receiver_emails."', '".$this->receiver_cc."', '"
+                .$this->receiver_bcc."', '".$this->banner."')";
 
         if($this->conn->execute($query)){
 
@@ -96,6 +111,22 @@ class EmailObject {
         }
 
         $uu = join(',', $uu);
+        return $uu;
+    }
+
+    //Get the users emails
+    public function get_users_emails($user_ids){
+
+        $uu = [];
+        $user_ids = explode(',', $user_ids);        
+        if(!is_array($user_ids) || count($user_ids) == 0) return [];
+
+        foreach ($user_ids as $key => $u_id) {
+            $query = "SELECT `email` FROM `users` WHERE `id`=".$u_id;
+            $u_email = $this->conn->getData($query);
+            array_push( $uu, $u_email[0]['email'] );
+        }
+
         return $uu;
     }
 

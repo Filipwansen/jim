@@ -22,8 +22,13 @@
         $r_type = $_POST['receiver_type'];
 
         $email->subject = $_POST['title'];
+ 
+        $email->content = $_POST['msg_contents'];  
 
-        $email->content = $_POST['msg_contents'];        
+        $email->receiver_cc = $_POST['cc'];
+
+        $email->receiver_bcc = $_POST['bcc'];
+        
 
         /*==>> File upload .. email_banner*/ 
         $MSG = "";
@@ -45,114 +50,74 @@
             $MSG = "Sorry, your file is too large.";
             $uploadOk = 0;
         }
-
-        if (move_uploaded_file($_FILES["attached"]["tmp_name"], $target_file)) {
-            
-            $MSG =  "Your MSG sent successfully. <br> The file has been uploaded.";
-            $uploadOk = 1;
-            $attached = $_FILES["attached"]["name"];
-        }
         else{
-            $uploadOk = 1;
-            $MSG = "Your MSG sent successfully. <br> But, Not Attached file.";
+
+            if (move_uploaded_file($_FILES["attached"]["tmp_name"], $target_file)) {
+                
+                $MSG =  "Your MSG sent successfully. <br> The file has been uploaded.";
+                $uploadOk = 1;
+                $attached = $_FILES["attached"]["name"];
+            }
+            else{
+                $uploadOk = 1;
+                $MSG = "Your MSG sent successfully. <br> But, Not Attached file.";
+            }
         }
+
 
         $_SESSION['resultMSG']=['type'=>$uploadOk, 'msg'=>$MSG];
 
         /*==>> Banner image upload */
         $_MSG = "";
-        $target_dir =  "../../upload/";
-        $target_file = $target_dir . basename($_FILES["attached"]["name"]);
+        $_target_dir =  "../../upload/banner_image/";
+        $_target_file = $_target_dir . basename($_FILES["banner"]["name"]);
 
-        $uploadOk = 1; $attached = "";
+        $_uploadOk = 1; $banner = "";
         
         //Check if file already exists
-        if (file_exists($target_file)) {
+        if (file_exists($_target_file)) {
 
-            $MSG = "Sorry, file already exists.";
-            $attached = $_FILES["attached"]["name"];
-            $uploadOk = 0;
-        }
-        // Check file size
-        if ($_FILES["attached"]["size"] > 500000) {
-
-            $MSG = "Sorry, your file is too large.";
-            $uploadOk = 0;
+            // $_MSG = "Sorry, file already exists.";
+            $banner = $_FILES["banner"]["name"];
+            $_uploadOk = 0;
         }
 
-        if (move_uploaded_file($_FILES["attached"]["tmp_name"], $target_file)) {
-            
-            $MSG =  "Your MSG sent successfully. <br> The file has been uploaded.";
-            $uploadOk = 1;
-            $attached = $_FILES["attached"]["name"];
+        if ( move_uploaded_file($_FILES["banner"]["tmp_name"], $_target_file) ) {
+
+            $_MSG =  "Your MSG sent successfully. <br> The file has been uploaded.";
+            $_uploadOk = 1;
+            $banner = $_FILES["banner"]["name"];
         }
         else{
-            $uploadOk = 1;
-            $MSG = "Your MSG sent successfully. <br> But, Not Attached file.";
+
+            $_uploadOk = 1;
+            $_MSG = "Your MSG sent successfully. <br> But, Not Banner file.";
         }
 
-        $_SESSION['resultMSG']=['type'=>$uploadOk, 'msg'=>$MSG];
-
-
+        $_SESSION['_resultMSG']=['type'=>$_uploadOk, 'msg'=>$_MSG];
 
         // insert the db table
+        $email->attach = $attached; 
+        $email->banner = $banner;
+        $receiver_id   = [];
 
-        $email->attach = $attached; $receiver_id=[];
-        if($r_type=="members"){
+        if($r_type=="members"){ 
             $r_ids = isset($_POST['receiver_ids']) ? $_POST['receiver_ids'] : "";
-            $receiver_id = explode(',', $r_ids);
+            $email->receiver_ids = $r_ids;
+            $email->receiver_emails = $_POST['selectedEmails'];
         }
         else if($r_type=="groups"){//selected groups
             $g_ids = isset($_POST['receiver_ids']) ?  $_POST['receiver_ids'] : "";
-            $g_ids = $email->get_users_ids($g_ids);
-            $receiver_id = explode(',', $g_ids);
+            $g_ids = $email->get_users_ids( $g_ids );
+            $email->receiver_ids = $g_ids;
+            $ee = $email->get_users_emails($email->receiver_ids);
+            $email->receiver_emails = join(',', $ee);
         }
 
-        $parent_id = isset($_POST['parent_id']) ? $_POST['parent_id'] : 0;
-
-        foreach ($receiver_id as $key => $r_id) {
-            $email->receiver_id = $r_id;
-            $email->p_id = $parent_id;
-            $email->create();
-        }
+        $email->create();
         
-        header('Location: ../../admin/?content=../emailblast/admin/ViewAllBlastEmail&item=emailpage');
+        header('Location: ../../admin/?content=../emailblast/admin/ViewAllBlastEmail&li_class=EmailBlast');
         return;
-
     }
-
-    // function file_upload($target_file, &$attached){  
-
-    //     $uploadOk = 1; $attached = ""; $MSG = "";
-
-    //     // Check if file already exists
-    //     if (file_exists($target_file)) {
-
-    //         $MSG = "Sorry, file already exists.";
-    //         $attached = $attached["name"];
-    //         $uploadOk = 0;
-    //     }
-    //     // Check file size
-    //     if ($attached["size"] > 500000) {
-
-    //         $MSG = "Sorry, your file is too large.";
-    //         $uploadOk = 0;
-    //     }
-    //     var_dump( move_uploaded_file($attached["tmp_name"], $target_file) );
-    //     die();
-
-    //     if (move_uploaded_file($attached["tmp_name"], $target_file)) {
-            
-    //         $MSG =  "Your MSG sent successfully. <br> The file has been uploaded.";
-    //         $uploadOk = 1;
-    //         $attached = $attached["name"];
-    //     }
-    //     else{
-    //         $uploadOk = 1;
-    //         $MSG = "Your MSG sent successfully. <br> But, Not Attached file.";
-    //     }
-
-    //     return [ 'upload' => $uploadOk, 'attach' =>  $attached, 'msg' => $MSG ];
-    // }
 
 ?>

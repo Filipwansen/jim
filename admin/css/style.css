@@ -980,3 +980,4 @@ p.emaildate{
 .bg-error{ 
    background: rgba(183, 101, 101, 0.9);
 }
+input#emailUids{background-color: #f7f7f7; width: 300px; overflow: hidden; text-overflow: ellipsis;}
