@@ -87,24 +87,46 @@
     </table>
 </div>
 <?php 
-if( isset($_SESSION["resultMSG"]['type']) ){ ?>
+if( isset($_SESSION["emailMSG"]['type']) ){ ?>
         
 <script type="text/javascript">
 $(document).ready(function() {
     jQuery.gritter.add({
 
-        title: "<?php $_SESSION["resultMSG"]['type']==0 ? print('Notify!') : print('Success!')?>",
+        title: "<?php $_SESSION["emailMSG"]['type']==0 ? print('Notify!') : print('Success!')?>",
+
+        text: "<?= $_SESSION["emailMSG"]['msg']?>",
+
+        sticky: false,
+
+        class_name: "<?php $_SESSION["emailMSG"]['type']==0 ? print('bg-error') : print('bg-success')?>",
+
+        time: '5000'                
+
+    });
+
+});
+</script>
+<?php unset($_SESSION["emailMSG"]); ?>
+<?php } ?>
+
+<?php if( isset($_SESSION["resultMSG"]['type']) && $_SESSION["resultMSG"]['type']==1 ){ ?>
+<script type="text/javascript">
+$(document).ready(function() {
+    jQuery.gritter.add({
+
+        title: "Notify!",
 
         text: "<?= $_SESSION["resultMSG"]['msg']?>",
 
         sticky: false,
 
-        class_name: "<?php $_SESSION["resultMSG"]['type']==0 ? print('bg-error') : print('bg-success')?>",
+        class_name: "bg-error",
 
         time: '3000'                
 
     });
-})
+});
 </script>
 <?php unset($_SESSION["resultMSG"]); ?>
 <?php } ?>

@@ -115,7 +115,7 @@
                                 });
                             </script>
 
-                        <img id="blah" src="#" alt=" Blast Email Banner Image " style=" width: 100%;
+                        <img id="blah" src='' alt=" Blast Email Banner Image " style=" width: 100%;
                                                                         max-width: 680px;
                                                                         height: auto;
                                                                         background: #dddddd;
