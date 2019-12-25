@@ -2,7 +2,7 @@
 
 
 
-class EmailObject {
+class BlastEmailObject {
 
  
 
@@ -14,7 +14,9 @@ class EmailObject {
 
     public $id;
 
-    public $sender_id;    
+    public $sender_id;
+
+    public $sender_email;    
 
     public $receiver_id;
 
@@ -61,14 +63,15 @@ class EmailObject {
                                              `subject`, 
                                              `attach`, 
                                              `content`, 
+                                             `sender_email`,
                                              `receiver_emails`,
                                              `receiver_cc`,
                                              `receiver_bcc`,
                                              `banner_img`) 
-        VALUES(".$this->sender_id.", '".$this->receiver_ids."', '".$this->subject."', '".$this->attach."', '"
-                .$this->content."', '".$this->receiver_emails."', '".$this->receiver_cc."', '"
+        VALUES(".$this->sender_id.",     '".$this->receiver_ids."', '".$this->subject."', '".$this->attach."', '"
+                .$this->content."',      '".$this->sender_email."', '".$this->receiver_emails."', '".$this->receiver_cc."', '"
                 .$this->receiver_bcc."', '".$this->banner."')";
-
+                
         if($this->conn->execute($query)){
 
             return true;
@@ -168,17 +171,17 @@ class EmailObject {
         return $stmt;
     }
 
-    // Admin read all but only gets all of the chain mail...
-    public function getAllAdmin(){
+    // Get all blast emails
+    public function getAllBlastEmails(){
 
-        $query = "SELECT * FROM `v_email_message` WHERE `p_id` = 0 AND `is_del`=0 ORDER BY id DESC ";        
+        $query = "SELECT * FROM `email_blast` WHERE `activate`=1 ORDER BY id DESC ";        
         $stmt = $this->conn->getData( $query );
 
         return $stmt;
     }
 
     public function getById($id){
-        $query = "SELECT * FROM `v_email_message` WHERE `id` = ".$id;
+        $query = "SELECT * FROM `email_blast` WHERE `id` = ".$id;
         $row = $this->conn->getData($query);
         return $row[0];
     }
@@ -261,18 +264,10 @@ class EmailObject {
     }
 
     /*Remove email msg*/
-    public function removeById($p_id){
+    public function removeById($id){
 
-        if($p_id > 0){
-
-            $ids = $this->getAllChainsByid($p_id);
-
-            foreach ($ids as $key => $id) {
-                $sql = "DELETE FROM `email_message` WHERE `id`=".$id['id'];
-                $this->conn->execute($sql);
-            }
-        }
-
+        $sql = "DELETE FROM `email_blast` WHERE `id`=".$id;
+        $this->conn->execute($sql);
     }
 
     /*Get the unread email count*/

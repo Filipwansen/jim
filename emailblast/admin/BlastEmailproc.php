@@ -12,14 +12,16 @@
 
     require_once("../classes/blastemail.class.php");
 
-    $conn = new Database();
-    $email = new EmailObject($conn);
+    $conn  = new Database();
+    $email = new BlastEmailObject($conn);
 // ===> Form action define.
     if(isset($_POST) && !empty($_POST['title'])) {
 
+        $r_type = $_POST['receiver_type'];
+
         $email->sender_id = $_POST['sender_id'];
 
-        $r_type = $_POST['receiver_type'];
+        $email->sender_email = $_SESSION['email'];
 
         $email->subject = $_POST['title'];
  
@@ -142,7 +144,7 @@
                                     <td>
                                       <div>';
         $message_  = $email->content;                              
-        $message = '<P style="padding-top: 10px">Dear Maria Sanchez,</P>
+        $message = '<P style="padding-top: 5px">Dear Maria Sanchez,</P>
 
                                         <p>This message contains important information for accessing your October 2019 <strong> NCCAA Certification Examination </strong> results via the Internet. Please follow the instructions below to successfully log on and print your certification letter, score report, keywords for the questions you answered incorrectly, and performance interpretation guidelines.</p>
 
@@ -254,14 +256,14 @@
         $headers[] = 'Bcc: test@mkbazaar.co.uk';
 
         // var_dump( $to, $subject, $message, implode("\r\n", $headers) );
-        var_dump( $message );
-        echo "\r\n";
-        die();
+        // var_dump( $message );
+        // echo "\r\n";
+        // die();
 
         // Mail it
         $res=0; $msg='';
         try{            
-            // $res = mail($to, $subject, $message, implode("\r\n", $headers));
+            $res = mail($to, $subject, $message, implode("\r\n", $headers));
         }
         catch (customException $e){
             $msg = $e->errorMessage();
@@ -273,7 +275,7 @@
         }
         else if($res == 0){
 
-            $_SESSION['emailMSG'] = ['type'=>$res, 'msg'=>'Oops.. Email was failed.'];
+            $_SESSION['emailMSG'] = ['type'=>$res, 'msg'=>'Oops.. Email Sending was failed.'];
         }
 
         header('Location: ../../admin/?content=../emailblast/admin/ViewAllBlastEmail&li_class=EmailBlast');

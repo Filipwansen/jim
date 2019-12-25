@@ -5,7 +5,6 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 session_start();
 require_once("../config.php");
-//print_r($_SESSION);
 if(empty($_SESSION['user_id']) || $_SESSION['user_id'] == "")
 {
   header('Location: /logincaamember.php');
@@ -26,18 +25,17 @@ require_once ("classes/financial.class.php");
 require_once ("classes/survey.class.php");
 require_once ("classes/visitor.class.php");
 require_once ("classes/users.class.php");
-
-require_once( BASE_PATH . "blog/blog.php");
-
+require_once ( BASE_PATH . "blog/blog.php");
 require_once("../email/classes/email.class.php");
+require_once("../emailblast/classes/blastemail.class.php");
 
 global $email;
-
 $email = new EmailObject($db);
 
+global $blastemail;
+$blastemail = new BlastEmailObject($db);
 
-global $dashboard_data; 
-
+global $dashboard_data;
 $dashboard_data = new adminDashboardObject();
 global $exam;
 $exam = new ExamObject();
@@ -54,8 +52,6 @@ $survey = new SurveyObject();
 global $visitors;
 $visitors = new VisitorsObject();
 
-global $email;
-$email = new EmailObject($db);
 //Show/no show
 if(isset($_POST['id']) && isset($_POST['show_id'])){
   $exam->updateShowAllow($_POST);
@@ -442,25 +438,13 @@ if(isset($_POST['id']) && isset($_POST['select_id'])){
 <script src="./js/bootstrap-datepicker.js"></script>
 <script src="./js/bootstrap-datepicker.min.js"></script>
 <script>
+  function confirmDelete(anchor){
 
-    function confirmDelete(anchor)
-
-    { 
-
-        var conf = confirm('Are you sure want to delete this?');
-
-        if(conf) {
-
-            window.location=anchor.attr("href");
-
-        }
-
-            
-
-    }
-
-	
-
+      var conf = confirm('Are you sure want to delete this?');
+      if(conf) {
+          window.location=anchor.attr("href");
+      }         
+  }
 </script>
 </body>
 </html>

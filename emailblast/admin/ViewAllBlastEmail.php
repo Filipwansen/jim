@@ -1,35 +1,28 @@
 <?php
 
-    if(empty($_SESSION['user_id']) || $_SESSION['user_id'] == "")
-    {
+    if(empty($_SESSION['user_id']) || $_SESSION['user_id'] == ""){
+
         header('Location: /logincaamember.php');
     }
 
     if(isset($_GET['act']) && $_GET['act'] == 'del'){
 
-        $email->removeById($_GET['id']);
+        $blastemail->removeById($_GET['id']);
     }
 
-    $result = $email->getAllAdmin();
+    $result = $blastemail->getAllBlastEmails();
 ?>
 
 <div class="member-card card">
 
-    <h3>BLAST EMAIL</h3>
+    <h3>ALL BLAST EMAIL</h3>
 
     <div class="form-group">
-
         <div class="right">
-
             <a href="?content=../emailblast/admin/AddNewBlastEmail&li_class=EmailBlast" class="btn btn-primary">+ Compose New Blast Email</a>
-
         </div>
-
-
         <div class="clearfix"></div>
-
     </div>
-
 
     <table id="viewAllEmailTbl" class="table table-striped table-bordered nowrap" style="width:100%">
 
@@ -38,51 +31,35 @@
             <th>From</th>
             <th>To</th>
             <th>Subject</th>
-            <th>Date</th>
+            <th>Send Date</th>
             <th>Actions</th>
           </tr>
         </thead>
-
-        <tbody>
-    <!-- <?php foreach($result as $key=>$row){?>
-        <tr style="<?php if($row['read'] == 0) echo 'background-color: #dcdcdc;' ?>">
+        <tbody>            
+    <?php foreach($result as $key=>$row){ ?>
+        <tr>
             <td><?= $row['sender_email']?></td>
-            <td><?= $row['receiver_email']?></td>
+            <td>
+                <?php $rr = strlen($row['receiver_emails']) > 30 ? substr($row['receiver_emails'], 0, 30)."..." : $row['receiver_emails'];?>
+                <?= $rr?>                    
+            </td>
             <td>
                 <?php $rowContents = strlen($row['subject']) > 27 ? substr($row['subject'], 0, 27)."..." : $row['subject'];?>
                 <a href="?content=../emailblast/admin/PreviewBlastEmail&li_class=EmailBlast&id=<?= $row['id'] ?>" title="<?= $row['subject']?>">
                     <?= $rowContents?> 
                 </a>
             </td>
-            <td style="width: 20%"><?= $row['regdate']; ?></td>
+            <td ><?= date( 'Y-m-d H:i', strtotime($row['regdate']) ) ?></td>
             <td class="text-center">
                 <a href="?content=../emailblast/admin/PreviewBlastEmail&li_class=EmailBlast&act=edit&id=<?= $row['id'] ?>" title="View"> 
-                  <span class="glyphicon glyphicon-eye-open"></span>
+                    <span class="glyphicon glyphicon-eye-open"></span>
                 </a>
-                <a onclick="confirmDelete($(this)); return false;" href="?content=../emailblast/admin/ViewAllEmail&li_class=EmailBlast&act=del&id=<?= $row['id'] ?>" title="Delete">
+                <a onclick="confirmDelete($(this)); return false;" href="?content=../emailblast/admin/ViewAllBlastEmail&li_class=EmailBlast&act=del&id=<?= $row['id'] ?>" title="Delete">
                     <span class="glyphicon glyphicon-trash"></span>
                 </a>
             </td>
         </tr>
-    <?php }?> -->
-        <tr style="" role="row" class="odd">
-            <td class="sorting_1">cynthia.m@nccaa.org</td>
-            <td>danaburgio@gmail.com</td>
-            <td>
-                <a href="?content=../emailblast/admin/PreviewBlastEmail&amp;li_class=EmailBlast&amp;id=102" title="Test #2">
-                    Test #2 
-                </a>
-            </td>
-            <td style="width: 20%">2019-12-21 01:03:44</td>
-            <td class="text-center">
-                <a href="?content=../emailblast/admin/PreviewBlastEmail&amp;li_class=EmailBlast&amp;act=edit&amp;id=102" title="View"> 
-                  <span class="glyphicon glyphicon-eye-open"></span>
-                </a>
-                <a onclick="confirmDelete($(this)); return false;" href="?content=../emailblast/admin/ViewAllEmail&amp;li_class=EmailBlast&amp;act=del&amp;id=102" title="Delete">
-                    <span class="glyphicon glyphicon-trash"></span>
-                </a>
-            </td>
-        </tr>
+    <?php }?>    
         </tbody>
     </table>
 </div>

@@ -132,23 +132,11 @@
         </div>
     </div>
 
-
             <div class="form-group border-b-1">
-
-
                 <div class="row">
-
-
-                    <div class="col-md-12">
-
-                    </div>
-
-
+                    <div class="col-md-12"></div>
                 </div>
-
-
             </div>
-
 
             <div>
                 <!-- >> File attach section -->
