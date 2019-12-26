@@ -100,7 +100,6 @@
     $to = $email->receiver_emails; // note the comma
 
     // Subject
-    // $subject = 'Birthday Reminders for August - Email Testing..';
     $subject = $email->subject;
 
     // Banner Img
@@ -143,31 +142,8 @@
                                 <tr>
                                     <td>
                                       <div>';
-        $message_  = $email->content;                              
-        $message = '<P style="padding-top: 5px">Dear Maria Sanchez,</P>
 
-                                        <p>This message contains important information for accessing your October 2019 <strong> NCCAA Certification Examination </strong> results via the Internet. Please follow the instructions below to successfully log on and print your certification letter, score report, keywords for the questions you answered incorrectly, and performance interpretation guidelines.</p>
-
-                                        <p>To log on you must provide the following information:<br>
-                                        <strong>Last Name:</strong> Sanchez<br>
-                                        <strong>First Name:</strong> Maria<br>
-                                        <strong>NCCAA (Constituent) ID#:</strong> 378476TY</p>
-
-                                        <P style="background: #ececec;">*Note: You will not be able to access your exam results if you do not supply information for all three items above.</P>
-
-                                        <p>You will also be prompted to provide your current email address.</p>
-
-                                        <P>To access your examination results, go to <a href="http://examinee.nbme.org/documents/NCCAA" target="_blink">http://examinee.nbme.org/documents/NCCAA</a>, log on using the identifying information listed above, and select the ‘Print Score Report’ link. Your exam results will open in a new browser window. Use your browser’s ‘Print’ function to print the report. If you lose your score report, you will be permitted to log on and access your report for approximately 6 months after the initial posting date.</P>
-
-                                        <p>Please note, NCCAA certification is a two-step process, obtained by passing the certification exam AND completing graduation from your university.  Your certificate will be available via the homepage of the NCCAA website within one week following official graduation.  Once NCCAA receives verification of graduation, you will receive instructions via email for obtaining your certificate and official certification number  According to the <a href="javascript:void(0)">Rules and Regulations</a>, the NCCAA is unable to provide verification of certification until this two-step process is complete.</p>  
-
-                                        <p>It is very important to maintain a current email address on file with the NCCAA. Your email address will be your login to access your account on the NCCAA website after graduation. Going forward, all communication, including CME Submission reminders and re-certification exam reminders will be sent via email. Your first CME Submission will be due by June 1, 2021, and once every two years following, including the year in which you are due to take the re-certification exam, which will occur in the year 2025. For a full list of the <a href="#">NCCAA Rules and Regulations</a>, please visit the website.</p>
-
-                                        <p>Once again, your certificate or certification number will NOT be available until after you have graduated.  Please refrain from requesting verification of certification be sent to State Medical Boards and/or Employers until AFTER your certificate has been released.</p>
-                                         
-                                        <p>If you have any questions or problems accessing your report, contact NCCAA by email at <a href="javascript:void(0)">cynthia.m@nccaa.org</a>.  Please refer to <a href="https://www.nccaatest.org/">www.nccaa.org</a> for additional information.</p>
-
-                                        <p>Sincerely,</p>';
+        $htmlContent  = $email->content;        
 
         $msg_footer ='</div>
                                     </td>
@@ -243,37 +219,58 @@
     </tr>
 </table>';
 
-        $message = $msg_header.$message.$msg_footer;
-
-        // To send HTML mail, the Content-type header must be set
-        $headers[] = 'MIME-Version: 1.0';
-        $headers[] = 'Content-type: text/html; charset=iso-8859-1';
-
-        // Additional headers
-        $headers[] = 'To: All of users';
-        $headers[] = 'From: test@mkbazaar.co.uk';
-        $headers[] = 'Cc: test@mkbazaar.co.uk';
-        $headers[] = 'Bcc: test@mkbazaar.co.uk';
-
-        // var_dump( $to, $subject, $message, implode("\r\n", $headers) );
-        // var_dump( $message );
-        // echo "\r\n";
-        // die();
+        $htmlContent = $msg_header.$htmlContent.$msg_footer;
 
         // Mail it
         $res=0; $msg='';
-        try{            
-            $res = mail($to, $subject, $message, implode("\r\n", $headers));
-        }
-        catch (customException $e){
-            $msg = $e->errorMessage();
-        }
 
-        if($res == 1){
+        //header for sender info
+        // $headers  = "From: test@mkbazaar.co.uk\n";
+        $headers  = "From: ".$email->sender_email."\n";
+        $headers .= "To: Users\n";
+        $headers .= "Cc: ".$email->receiver_cc."\n";
+        $headers .= "Bcc: ".$email->receiver_bcc."\n";
+        //boundary 
+        $semi_rand = md5(time()); 
+        $mime_boundary = "==Multipart_Boundary_x{$semi_rand}x"; 
+
+        //headers for attachment 
+        $headers .= "MIME-Version: 1.0\n" . "Content-Type: multipart/mixed;\n" . " boundary=\"{$mime_boundary}\""; 
+
+        //multipart boundary 
+        $message = "--{$mime_boundary}\n" . "Content-Type: text/html; charset=\"UTF-8\"\n" .
+                   "Content-Transfer-Encoding: 7bit\n\n" . $htmlContent . "\n\n"; 
+
+        //preparing attachment
+        $file = "../../upload/".$email->attach;
+        if(!empty($file) > 0){
+            if(is_file($file)){
+                $message .= "--{$mime_boundary}\n";
+                $fp =    @fopen($file,"rb");
+                $data =  @fread($fp,filesize($file));
+
+                @fclose($fp);
+                $data = chunk_split(base64_encode($data));
+                $message .= "Content-Type: application/octet-stream; name=\"".basename($file)."\"\n" . 
+                "Content-Description: ".basename($file)."\n" .
+                "Content-Disposition: attachment;\n" . " filename=\"".basename($file)."\"; size=".filesize($file).";\n" . 
+                "Content-Transfer-Encoding: base64\n\n" . $data . "\n\n";
+            }
+        }
+        $message .= "--{$mime_boundary}--";
+        $returnpath = "-f" . $email->sender_email;
+
+        // var_dump($message);
+        // die();
+
+        //send email
+        $res = @mail($to, $subject, $message, $headers, $returnpath);
+
+        if($res){
 
             $_SESSION['emailMSG'] = ['type'=>$res, 'msg'=>'Emails were sent successfully!'];
         }
-        else if($res == 0){
+        else{
 
             $_SESSION['emailMSG'] = ['type'=>$res, 'msg'=>'Oops.. Email Sending was failed.'];
         }
