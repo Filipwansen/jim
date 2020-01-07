@@ -121,9 +121,14 @@ class Database {
         $rows = array(); $ii = 0;
         while ($row = $result->fetch_array()) {
 
-            // $r_gname = "<a href='javascript:void(0)' userdata='".$row['users_id']."' onclick='view_members('".$row['group_name']."',".$row['id'].")'>".$row['group_name']."</a>";
-            $r_gname = "<a href='javascript:void(0)' userdata='".$row['users_id']."' name='group_member$ii' >".$row['group_name']."</a>";
-            array_push($rows, [ $ii++, $row['id'], $r_gname, $row['users_id'] ]);
+            // $r_gname = "<a href='javascript:void(0)' userdata='".$row['users_id']."' name='group_member$ii' >".$row['group_name']."</a>";
+            // array_push($rows, [ $ii++, $row['id'], $r_gname, $row['users_id'] ]);
+
+            $edit_gp = "<a href='javascript:void(0)' title='Group Edit' gname='".$row['group_name']."' userdata='".$row['users_id']."' name='group_member$ii'><span class='glyphicon glyphicon-edit'></span></a>";
+
+            $del_gp = '<a href="javascript:void(0)" title="Group Delete" id="delGroupID"><span class="glyphicon glyphicon-trash"></span></a>';
+
+            array_push($rows, [ $ii++, $row['id'], $row['group_name'], $edit_gp."|".$del_gp, $row['users_id'] ]);
         }    
         return $rows;
     }

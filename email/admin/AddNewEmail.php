@@ -269,6 +269,7 @@
                             <th></th>
                             <th>Group ID</th>
                             <th>Group Name</th>
+                            <th>Action</th>
                           </tr>
                         </thead>
 
@@ -332,7 +333,7 @@
                 <h4 style="display: inline-block;">Board of Directors1</h4>
                 <input type="hidden" name="groupID">
                 <!-- <a href="javascript:void(0)" style="margin-left: 5px" title="Edit" id="editGroupID"><i class="fas fa-edit"></i></a>  -->
-                <a href="javascript:void(0)" style="margin-left: 5px" title="Group Delete" id="delGroupID"><i class="fas fa-trash-alt"></i></a>
+                <!-- <a href="javascript:void(0)" style="margin-left: 5px" title="Group Delete" id="delGroupID"><i class="fas fa-trash-alt"></i></a> -->
 
                 <table id="emailGroupUsersTbl" class="table table-striped table-bordered nowrap" style="width:100%">
                     <thead>
